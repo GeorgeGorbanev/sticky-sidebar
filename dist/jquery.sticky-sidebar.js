@@ -106,7 +106,13 @@ var stickySidebar = createCommonjsModule(function (module, exports) {
        * The sidebar returns to its normal position if its width below this value.
        * @type {Numeric}
        */
-      minWidth: false
+      minWidth: false,
+
+      /**
+      * Additional bottom offset of sticky stop point.
+      * @type {Numeric}
+      */
+      containerBottomPadding: 0
     };
 
     // ---------------------------------
@@ -168,7 +174,8 @@ var stickySidebar = createCommonjsModule(function (module, exports) {
           containerHeight: 0,
           viewportHeight: 0,
           viewportTop: 0,
-          lastViewportTop: 0
+          lastViewportTop: 0,
+          containerBottomPadding: 0
         };
 
         // Bind event handlers for referencability.
@@ -270,7 +277,8 @@ var stickySidebar = createCommonjsModule(function (module, exports) {
 
           // Container of sticky sidebar dimensions.
           dims.containerTop = StickySidebar.offsetRelative(this.container).top;
-          dims.containerHeight = this.container.clientHeight;
+          dims.containerBottomPadding = this.options.containerBottomPadding;
+          dims.containerHeight = this.container.clientHeight - dims.containerBottomPadding;
           dims.containerBottom = dims.containerTop + dims.containerHeight;
 
           // Sidebar dimensions.
